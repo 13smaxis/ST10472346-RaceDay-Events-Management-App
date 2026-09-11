@@ -85,3 +85,20 @@ CREATE TABLE RESULTS (
     position INT NOT NULL,
     created_at DATETIME2 DEFAULT GETUTCDATE()
 );
+
+--Creates a juntion table Between PARTICIPANT, EVENT and RESULT
+--Assited by AI agent
+CREATE TABLE ENROLMENT (
+    enrolment_id INT PRIMARY KEY IDENTITY(1,1),
+    participant_id INT NOT NULL,
+    event_id INT NOT NULL,
+    results_id INT UNIQUE,
+    category_id INT NOT NULL,
+    entry_date DATETIME2 DEFAULT GETUTCDATE(),
+    status NVARCHAR(50) NOT NULL CHECK (status IN ('registered', 'confirmed', 'started', 'finished', 'withdrawn', 'disqualified')),
+    FOREIGN KEY (participant_id) REFERENCES PARTICIPANT(participant_id) ON DELETE CASCADE,
+    FOREIGN KEY (event_id) REFERENCES EVENT(event_id) ON DELETE CASCADE,
+    FOREIGN KEY (results_id) REFERENCES RESULTS(results_id) ON DELETE SET NULL,
+    FOREIGN KEY (category_id) REFERENCES CATEGORY(category_id),
+    UNIQUE (participant_id, event_id)
+);
