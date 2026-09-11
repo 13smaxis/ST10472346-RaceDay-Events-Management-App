@@ -102,3 +102,13 @@ CREATE TABLE ENROLMENT (
     FOREIGN KEY (category_id) REFERENCES CATEGORY(category_id),
     UNIQUE (participant_id, event_id)
 );
+
+--Creates a perfmance_history table
+CREATE TABLE PERFORMANCE_HISTORY (
+    history_id INT PRIMARY KEY IDENTITY(1,1),
+    participant_id INT NOT NULL,
+    finish_time DATETIME2,
+    finish_position INT,
+    recorded_at DATETIME2 DEFAULT GETUTCDATE(),
+    FOREIGN KEY (participant_id) REFERENCES PARTICIPANT(participant_id) ON DELETE CASCADE
+);
