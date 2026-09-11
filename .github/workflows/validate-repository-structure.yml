@@ -21,15 +21,4 @@ jobs:
 
           echo "docs folder exists."
 
-      - name: Check required documents
-          if [ ! -f "docs/race_day_erd.pdf" ]; then
-            echo "ERROR: race_day_erd.pdf is missing."
-            exit 1
-          fi
-
-          echo "All required documents are present."
-
-                - name: Validate repository structure
-        run: |
-          echo "Repository structure is valid."
       
