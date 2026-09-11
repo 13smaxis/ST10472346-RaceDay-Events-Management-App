@@ -18,17 +18,19 @@ jobs:
             echo "ERROR: docs folder does not exist."
             exit 1
           fi
-
           echo "docs folder exists."
 
       - name: Check required documents
-      -run: |
+        run: |
+          if [ ! -f "docs/RaceDay.sql" ]; then
+            echo "ERROR: RaceDay.sql is missing."
+            exit 1
+          fi
+
           if [ ! -f "docs/race_day_erd.pdf" ]; then
             echo "ERROR: race_day_erd.pdf is missing."
             exit 1
           fi
-
-          echo "All required documents are present."
 
           if [ ! -f "docs/race_day_api_endpoints.pdf" ]; then
             echo "ERROR: race_day_api_endpoints.pdf is missing."
@@ -40,4 +42,3 @@ jobs:
       - name: Validate repository structure
         run: |
           echo "Repository structure is valid."
-      
