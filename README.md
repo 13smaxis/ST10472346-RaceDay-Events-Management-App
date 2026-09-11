@@ -69,6 +69,10 @@ The following screenshot shows the successful GitHub Actions workflow execution:
 
 ![alt text](image.png)
 
+## Project Demonstration
+
+[▶️ Watch the RaceDay project demonstration on YouTube](https://youtu.be/XM2-w1DWHKk)
+
 ## Technologies
 
 * SQL Server
