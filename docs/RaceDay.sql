@@ -31,3 +31,57 @@ CREATE TABLE PARTICIPANT (
     phone VARCHAR(20),
     created_at DATETIME2 DEFAULT GETUTCDATE()
 );
+
+--Creates Profile table
+CREATE TABLE PROFILE (
+    profile_id INT PRIMARY KEY IDENTITY(1,1),
+    user_id INT NOT NULL UNIQUE,
+    participant_id INT UNIQUE,
+    organiser_id INT UNIQUE,
+    created_at DATETIME2 DEFAULT GETUTCDATE(),
+    FOREIGN KEY (user_id) REFERENCES [USER](user_id) ON DELETE CASCADE,
+    FOREIGN KEY (participant_id) REFERENCES PARTICIPANT(participant_id) ON DELETE SET NULL,
+    FOREIGN KEY (organiser_id) REFERENCES ORGANISER(organiser_id) ON DELETE SET NULL
+);
+
+--Creates Events tavle
+CREATE TABLE EVENT (
+    event_id INT PRIMARY KEY IDENTITY(1,1),
+    event_name VARCHAR(200) NOT NULL,
+    location VARCHAR(200) NOT NULL,
+    latitude DECIMAL(10, 8) NOT NULL,
+    longitude DECIMAL(11, 8) NOT NULL,
+    event_date DATETIME2 NOT NULL,
+    status VARCHAR(50) NOT NULL CHECK (status IN ('scheduled', 'ongoing', 'completed', 'cancelled')),
+    created_at DATETIME2 DEFAULT GETUTCDATE()
+);
+
+--Creates the category table
+CREATE TABLE CATEGORY (
+    category_id INT PRIMARY KEY IDENTITY(1,1),
+    category_name VARCHAR(100) NOT NULL UNIQUE,
+    created_at DATETIME2 DEFAULT GETUTCDATE()
+);
+
+--Creates the routes table
+--Thisis the proptery of the events
+CREATE TABLE ROUTE (
+    route_id INT PRIMARY KEY IDENTITY(1,1),
+    event_id INT NOT NULL,
+    route_name NVARCHAR(200) NOT NULL,
+    distance DECIMAL(10, 2) NOT NULL,
+    start_location NVARCHAR(200) NOT NULL,
+    end_location NVARCHAR(200) NOT NULL,
+    map_url NVARCHAR(MAX),
+    created_at DATETIME2 DEFAULT GETUTCDATE(),
+    FOREIGN KEY (event_id) REFERENCES EVENT(event_id) ON DELETE CASCADE
+);
+
+--Creates the results table
+CREATE TABLE RESULTS (
+    results_id INT PRIMARY KEY IDENTITY(1,1),
+    start_time DATETIME2 NOT NULL,
+    finish_time DATETIME2 NOT NULL,
+    position INT NOT NULL,
+    created_at DATETIME2 DEFAULT GETUTCDATE()
+);
