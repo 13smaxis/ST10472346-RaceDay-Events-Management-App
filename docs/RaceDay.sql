@@ -112,3 +112,77 @@ CREATE TABLE PERFORMANCE_HISTORY (
     recorded_at DATETIME2 DEFAULT GETUTCDATE(),
     FOREIGN KEY (participant_id) REFERENCES PARTICIPANT(participant_id) ON DELETE CASCADE
 );
+
+INSERT INTO [USER] (username, password_hash, email, role)
+VALUES
+('john.mokoena', 'hashed_password_001', 'john.mokoena@example.com', 'organiser'),
+('sarah.naidoo', 'hashed_password_002', 'sarah.naidoo@example.com', 'organiser'),
+('thabo.molefe', 'hashed_password_003', 'thabo.molefe@example.com', 'participant'),
+('lindiwe.dlamini', 'hashed_password_004', 'lindiwe.dlamini@example.com', 'participant');
+
+
+-- ORGANISERS
+INSERT INTO ORGANISER (first_name, last_name, phone)
+VALUES
+('John', 'Mokoena', '0825551001'),
+('Sarah', 'Naidoo', '0835551002');
+
+
+-- PARTICIPANTS
+INSERT INTO PARTICIPANT (first_name, last_name, phone)
+VALUES
+('Thabo', 'Molefe', '0845551003'),
+('Lindiwe', 'Dlamini', '0855551004');
+
+-- EVENTS
+INSERT INTO EVENT 
+(event_name, location, latitude, longitude, event_date, status)
+VALUES
+('Johannesburg City Run', 'Sandton, Johannesburg', -26.1076, 28.0567, 
+ '2026-10-10 07:00:00', 'scheduled'),
+
+('Pretoria Spring Marathon', 'Pretoria CBD', -25.7479, 28.2293, 
+ '2026-10-24 06:30:00', 'scheduled'),
+
+('Soweto Heritage Trail', 'Soweto, Johannesburg', -26.2485, 27.8540, 
+ '2026-11-07 07:30:00', 'scheduled');
+
+
+ -- CATEGORIES
+INSERT INTO CATEGORY (category_name)
+VALUES
+-- Johannesburg City Run
+('5km Men'),
+('5km Women'),
+('10km Open'),
+
+-- Pretoria Spring Marathon
+('10km Men'),
+('10km Women'),
+('21km Open'),
+
+-- Soweto Heritage Trail
+('5km Trail'),
+('10km Trail');
+
+
+-- PERFORMANCE HISTORY
+INSERT INTO PERFORMANCE_HISTORY
+(participant_id, finish_time, finish_position)
+VALUES
+(1, '2026-09-01 08:15:00', 3),
+(2, '2026-09-01 08:22:00', 5);
+
+--Returns all sceama
+SELECT 
+    TABLE_SCHEMA,
+    TABLE_NAME,
+    COLUMN_NAME,
+    DATA_TYPE,
+    CHARACTER_MAXIMUM_LENGTH,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+ORDER BY TABLE_SCHEMA, TABLE_NAME, ORDINAL_POSITION;
+
+SELECT *
+FROM PARTICIPANT;
