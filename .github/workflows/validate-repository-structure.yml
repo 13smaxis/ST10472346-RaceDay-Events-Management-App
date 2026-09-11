@@ -22,6 +22,7 @@ jobs:
           echo "docs folder exists."
 
       - name: Check required documents
+      -run: |
           if [ ! -f "docs/race_day_erd.pdf" ]; then
             echo "ERROR: race_day_erd.pdf is missing."
             exit 1
