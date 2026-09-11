@@ -34,7 +34,9 @@ jobs:
             exit 1
           fi
 
-                - name: Validate repository structure
+          echo "All required documents are present."
+
+      - name: Validate repository structure
         run: |
           echo "Repository structure is valid."
       
