@@ -71,7 +71,7 @@ The following screenshot shows the successful GitHub Actions workflow execution:
 
 ## Project Demonstration
 
-[▶️ Watch the RaceDay project demonstration on YouTube](https://youtu.be/XM2-w1DWHKk)
+[▶️ Watch the RaceDay project demonstration on YouTube](https://youtu.be/sulZqaSXf58)
 
 ## Technologies
 
